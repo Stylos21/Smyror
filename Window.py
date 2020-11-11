@@ -39,12 +39,11 @@ class Smyror:
         direct = response['data'][0]['wind_cdir']
         temp = response['data'][0]['temp']
         image_dict = {"thunderstorms" in desc_l: "thunder", "shower rain" in desc_l or "rain" in desc_l or "drizzle" in desc_l or "hail" in desc_l:"rainy","Clear sky" == desc:"clear","snow shower" in desc_l or "snow" in desc_l or "flurries" == desc_l:"snow","sleet" in desc_l or desc == "Mix snow/rain":"sleet", "clouds" in desc_l:"cloudy"}
-        f = ""
+        forecast_image = ""
         for e, i in enumerate(image_dict):
             if e:
-                f =  image_dict[e]
-        print(f)
-        img = Image.open(f"./assets/{f}.png").resize((200, 200), Image.ANTIALIAS)
+                forecast_image =  image_dict[e]
+        img = Image.open(f"./assets/{forecast_image}.png").resize((200, 200), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(img)
         self.C.img = img
         self.C.itemconfig(self.forecast_img, image=img)
