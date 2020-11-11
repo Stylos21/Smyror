@@ -17,14 +17,14 @@ class Smyror:
         self.date = self.C.create_text(860, 380, text="N/A", font="AvenirNextLTPro 40", fill="white")
         self.arc = self.C.create_arc(coord, start=0, extent=0, outline="#333", style=tk.ARC, width=6)
         self.wqi = self.C.create_text(coord[0] + ((coord[2] - coord[0]) / 2), coord[1] + (coord[3] - coord[1]) / 2,
-                                      font="AvenirNextLTPro 30", fill="white", text=f"NaN WQI")
+                                      font="AvenirNextLTPro 30", fill="white", text="NaN WQI")
 
         self.forecast_img = self.C.create_image((50, (1030 * .7) - 200), image="", anchor='nw')
-        self.temperature = self.C.create_text((340, (1030 * .7) - 130), text=f"N/AºF", font="AvenirNextLTPro 25",
+        self.temperature = self.C.create_text((340, (1030 * .7) - 130), text="N/AºF", font="AvenirNextLTPro 25",
                                               fill="white", anchor="nw")
-        self.wind = self.C.create_text((860, (1030 * .7) - 80), text=f"N/A MPH NA", font="AvenirNextLTPro 35",
+        self.wind = self.C.create_text((860, (1030 * .7) - 80), text="N/A MPH NA", font="AvenirNextLTPro 35",
                                        fill="white")
-        self.forecast = self.C.create_text((340, (1030 * .7) - 80), text=f"Forecast is unavailable.", font="AvenirNextLTPro 20",
+        self.forecast = self.C.create_text((340, (1030 * .7) - 80), text="Forecast is unavailable.", font="AvenirNextLTPro 20",
                                            fill="white", anchor="nw", width=470)
         # self.update_weather_and_awi("Clear sky", 46)
         self.update_weather()
@@ -52,7 +52,7 @@ class Smyror:
         self.C.itemconfig(self.wind, text=f"{wind} MPH {direct}")
         self.C.itemconfig(self.temperature, text=f"{temp}ºF")
 
-        name = self.C.create_text(860, 180, text=f"Hello, Joshua.", font="AvenirNextLTPro 50", fill="white")
+        name = self.C.create_text(860, 180, text="Hello, Joshua.", font="AvenirNextLTPro 50", fill="white")
 
         self.update_awi(desc, temp, wind)
 
