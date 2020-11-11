@@ -52,7 +52,7 @@ class Smyror:
         self.C.itemconfig(self.wind, text=f"{wind} MPH {direct}")
         self.C.itemconfig(self.temperature, text=f"{temp}ºF")
 
-        name = self.C.create_text(860, 180, text="Hello, Joshua.", font="AvenirNextLTPro 50", fill="white")
+        self.C.create_text(860, 180, text="Hello.", font="AvenirNextLTPro 50", fill="white")
 
         self.update_awi(desc, temp, wind)
 
