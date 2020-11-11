@@ -1,20 +1,10 @@
 # Smyror v1.1.1
 # Weatherbit API key is hidden.
 
-
-
-import base64
-import io
 import tkinter as tk
 import datetime
-import PIL
 import requests
-
-from PIL import ImageTk, Image
-from urllib.request import urlopen
-import requests
-from io import BytesIO
-
+from PIL import Image, ImageTk
 
 class Smyror:
     def __init__(self, master):
