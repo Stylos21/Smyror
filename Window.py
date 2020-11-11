@@ -64,7 +64,7 @@ class Smyror:
         awi = 0
         COLOR = ""
 
-        dict = {range(-150, 40): -10, range(40, 45): -5, range(45, 50): -2.5, range(50, 60): -1, range(60, 62): 1, range(62, 65): 2.5, range(65, 68): 5, range(68, 74): 7.5,
+        dict_temp = {range(-150, 40): -10, range(40, 45): -5, range(45, 50): -2.5, range(50, 60): -1, range(60, 62): 1, range(62, 65): 2.5, range(65, 68): 5, range(68, 74): 7.5,
                 range(74, 79): 10, range(79, 83): 7.5, range(83, 85): 5, range(85, 90): 0, range(90, 95): -5,
                 range(95, 190): -10}
 
@@ -90,9 +90,9 @@ class Smyror:
 
 
         
-        for j, k in enumerate(dict):
+        for j, k in enumerate(dict_temp):
             if temperature in k:
-                awi += dict[k]
+                awi += dict_temp[k]
 
         awi -= wind * 0.1
         dict_color = {"#ed493e":-25 <= awi < -15, "#eb783b":-15 <= awi <= -10, "#eda73e":-10 <= awi < -5, "#eaed3e":-5 <= awi < 0,
