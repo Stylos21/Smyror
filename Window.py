@@ -1,11 +1,19 @@
-# Smyror v1.1.0
+# Smyror v1.1.1
 # Weatherbit API key is hidden.
+
+
+
+import base64
+import io
 import tkinter as tk
 import datetime
 import PIL
 import requests
-from PIL import Image
+
+from PIL import ImageTk, Image
+from urllib.request import urlopen
 import requests
+from io import BytesIO
 
 
 class Smyror:
@@ -28,6 +36,7 @@ class Smyror:
                                        fill="white")
         self.forecast = self.C.create_text((340, (1030 * .7) - 80), text=f"Forecast is unavailable.", font="AvenirNextLTPro 20",
                                            fill="white", anchor="nw", width=470)
+        # self.update_weather_and_awi("Clear sky", 46)
         self.update_weather()
         self.time()
 
@@ -44,7 +53,8 @@ class Smyror:
         for e, i in enumerate(image_dict):
             if e:
                 f =  image_dict[e]
-        img = Image.open(f"{f}.png").resize((200, 200), Image.ANTIALIAS)
+        print(f)
+        img = Image.open(f"./assets/{f}.png").resize((200, 200), Image.ANTIALIAS)
         img = ImageTk.PhotoImage(img)
         self.C.img = img
         self.C.itemconfig(self.forecast_img, image=img)
@@ -52,11 +62,12 @@ class Smyror:
         self.C.itemconfig(self.wind, text=f"{wind} MPH {direct}")
         self.C.itemconfig(self.temperature, text=f"{temp}ºF")
 
-        name = self.C.create_text(860, 180, text=f"Hello.", font="AvenirNextLTPro 50", fill="white")
+        name = self.C.create_text(860, 180, text=f"Hello, Joshua.", font="AvenirNextLTPro 50", fill="white")
 
         self.update_awi(desc, temp, wind)
 
         self.master.after(600000, self.update_weather)
+        # res = urlopen(f"https://www.weatherbit.io/static/img/icons/{icon}.png").read()
 
     def update_awi(self, condition, temperature, wind):
 
@@ -67,27 +78,44 @@ class Smyror:
                 range(74, 79): 10, range(79, 83): 7.5, range(83, 85): 5, range(85, 90): 0, range(90, 95): -5,
                 range(95, 190): -10}
 
-        dict_color = {range(-25, -15): "#ed493e", range(-15, -10): "#eb783b", range(-10, -5): "#eda73e", range(-5, 0):"#eaed3e",
-                      range(0, 10): "#b6ed3e", range(10, 20): "#56f580",
-                      range(20, 25): "#3eedbb"}
+        
         condition = condition.lower()
 
-        dict_condition = {"heavy" in condition or "overcast" in condition or "scattered" in condition: -5, "moderate" in condition or "broken" in condition: -3, "light" in condition or "few" in condition: -1, "drizzle" in condition: -2.5, "rain" in condition: -5, "snow" in condition: -8, "mix" in condition: -10, "sleet" in condition:-15, "thunder" in condition:-10, "fog" in condition:-2, "clear" in condition: 15, "clouds" in condition:10}
+        dict_condition = {"heavy" in condition: -10, "overcast" in condition or "scattered" in condition: -5,  "moderate" in condition: -5, "broken" in condition: -3, "light" in condition: -3.5, "few" in condition: -1, "freezing" in condition: -12.5}
+        dict_forecast = {"drizzle" in condition: -2.5, "rain" in condition: -5, "snow" in condition: -8, "mix" in condition: -10, "sleet" in condition:-15, "thunder" in condition:-10, "fog" in condition:-2, "clear" in condition: 15, "clouds" in condition:10}
 
         for e, j in enumerate(dict_condition):
+            print(e)
+
             if e:
+                print(dict_condition[e])
                 awi += dict_condition[e]
+
+        for exp, _ in enumerate(dict_forecast):
+            print(e)
+
+            if exp:
+                print(dict_forecast[e])
+                awi += dict_forecast[e]
+
+
         
         for j, k in enumerate(dict):
             if temperature in k:
                 awi += dict[k]
 
         awi -= wind * 0.1
+        dict_color = {"#ed493e":-25 <= awi < -15, "#eb783b":-15 <= awi <= -10, "#eda73e":-10 <= awi < -5, "#eaed3e":-5 <= awi < 0,
+                      "#b6ed3e": 0 <= awi <= 10, "#56f580":10 <= awi < 20,
+                      "#3eedbb": 20 <= awi < 25}
         for j, k in enumerate(dict_color):
-            if int(awi) in k:
-                COLOR = dict_color[k]
+            if dict_color[k]:
+
+                COLOR = k
+                print(COLOR)
+
         deg = ((awi + 25) / 50) * 359
-        self.C.itemconfig(self.wqi, text=f"{awi} WQI")
+        self.C.itemconfig(self.wqi, text=f"{round(awi, 3)} WQI")
         self.C.itemconfig(self.arc, extent=deg, outline=COLOR)
 
     def time(self):
