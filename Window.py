@@ -36,7 +36,7 @@ class Smyror:
         
     def update_weather(self):
         response = requests.get(
-            "https://api.weatherbit.io/v2.0/current?city=Rockville,MD&key=b289f4b7e9a44b4498de1aa1687673ce&units=I").json()
+            "https://api.weatherbit.io/v2.0/current?city=Rockville,MD&key=[API_KEY]&units=I").json()
         desc = response['data'][0]['weather']["description"]
         desc_l = desc.lower()
         wind = response['data'][0]['wind_spd']
