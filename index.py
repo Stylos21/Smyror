@@ -11,8 +11,8 @@ s = Mirror(root)
 ENTRY = "description"
 CHANNEL = "channel"
 pnconfig = PNConfiguration()
-pnconfig.publish_key = "pub-c-bc20a898-d25e-4f56-ab48-425a6cc55f09"
-pnconfig.subscribe_key = "sub-c-ffe2fd82-607d-11ea-8216-b6c21e45eadc"
+pnconfig.publish_key = "PUBLISH_KEY"
+pnconfig.subscribe_key = "SUBSCRIBE_KEY"
 pnconfig.uuid = "pepepepepeep"
 pubnub = PubNub(pnconfig)
 pubnub.add_listener(s)
