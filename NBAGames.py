@@ -11,7 +11,7 @@ class NBAGame:
         self.background_canvas = tk.Canvas(self.master, bg="black", width=1920, height=1080, highlightcolor="black", highlightthickness=0)
         self.canvas = tk.Canvas(self.master, bg="black", width=1920, height=1080, highlightcolor="black", highlightthickness=0)
         # self.canvas.pack() 
-        self.time_label = self.canvas.create_text(100, 100, text="", fill="white", font="AvenirNextLTPro 30")
+
 
         self.image = self.canvas.create_image((0.25 * 1920 - 300/2, 0.4 * 1080 - 300/2), anchor=tk.NW)
         self.image2 = self.canvas.create_image((0.65 * 1920 - 300/2, 0.4 * 1080 - 300/2), anchor=tk.NW)
@@ -44,11 +44,13 @@ class NBAGame:
         year = date.strftime("%Y")
         month = date.strftime("%m")
         date = date.strftime("%d")
-        
-        response = requests.get(f"http://data.nba.net/10s/prod/v1/{year}{month}{int(date)}/scoreboard.json").json()['games'][self.game_id - 1]
+        print(year, month, date)
+        print(requests.get(f"http://data.nba.net/10s/prod/v1/{year}{month}{date}/scoreboard.json").json())
+        response = requests.get(f"http://data.nba.net/10s/prod/v1/{year}{month}{date}/scoreboard.json").json()['games'][self.game_id - 1]
+        print(response)
         image_home = Image.open(f"/home/pi/NBALogos/{response['hTeam']['triCode'].lower()}.png")
         image_away = Image.open(f"/home/pi/NBALogos/{response['vTeam']['triCode'].lower()}.png")
-        period = f"Q{response['period']['current']} - {response['clock']}" if 0 < int(response['period']['current']) <= 4 and response['clock'] != '' and response['gameDuration']['hours'] != '' and not response['period']['isHalftime'] else "HALF" if response['period']['isHalftime'] else "FINAL" if response['gameDuration']['hours'] != '' and int(response['period']['current']) == 4 else f"{response['startTimeEastern']}"
+        period = f"Q{response['period']['current']} - {response['clock']}" if 0 < int(response['period']['current']) <= 4 and response['clock'] != '' and response['gameDuration']['hours'] != '' and not response['period']['isHalftime'] else "HALF" if response['period']['isHalftime'] else "FINAL" if response['gameDuration']['hours'] != '' and int(response['period']['current']) == 4 else f"END OF Q{response['period']['current']}" if response['period']['isEndOfPeriod'] else f"{response['startTimeEastern']}"
         image_home = ImageTk.PhotoImage(image_home.resize(self.sizeH))
         image_away = ImageTk.PhotoImage(image_away.resize(self.sizeA))
 
@@ -85,10 +87,5 @@ class NBAGame:
         self.canvas.itemconfig(self.location, text=f'')
         self.canvas.itemconfig(self.tricode_home, text=f"")
         self.canvas.itemconfig(self.tricode_away, text=f"") 
-        self.canvas.itemconfig(self.time_label, text="")
         self.master.after_cancel(self.info_after)
-    # def time(self):
-    #     now = datetime.now()
-    #     time = now.strftime('%I:%M')
-    #     self.canvas.itemconfig(self.time_label, text=f"{time}")
-    #     self.time_after = self.master.after(1000, self.time)
+
