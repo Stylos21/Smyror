@@ -14,7 +14,7 @@ The images below were taken around 2-3 years ago, and accurately reflect the UI'
 
 ![image](image0.jpg)
 ![image](IMG_1572.jpeg)
-![image](image0 (1).jpg)
+![image](img.jpg)
 
 
 If you take a look at the NBAStats branch, I integrated a feature where two devices were able to communicate with each other to swtich between the weather information and any specific NBA game. This was accomplished through a library called PubNub, which allows for one end to send information, and the other to receive, interpret and respond accordingly to it. PubNub code can be found in the Screen.py file of the "NBAStats" branch. Please note that the setup of the Mirror class, more particularly, the creation of the presence and status methods, were taken from PubNub's documentation on how to setup the API.
@@ -23,7 +23,7 @@ Although the code for the sending aspect of the project was lost, below is a vid
 
 
 
-![vid](https://youtube.com/shorts/eam76JzjhzI?feature=share)
+https://youtube.com/shorts/eam76JzjhzI?feature=share
 
 (video uploaded to youtube in order to properly format on this README file.)
 
