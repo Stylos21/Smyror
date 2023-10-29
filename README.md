@@ -21,8 +21,7 @@ If you take a look at the NBAStats branch, I integrated a feature where two devi
 
 Although the code for the sending aspect of the project was lost, below is a video of the demonstration of the functionality, also filmed 2-3 years ago.
 
-![vid](IMG_1582.mov)
 
 
-
+![vid](https://github.com/Stylos21/Smyror/assets/33937944/6d1bb6ce-0b33-40fd-a267-b61dec4f182c)
 
