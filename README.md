@@ -23,5 +23,7 @@ Although the code for the sending aspect of the project was lost, below is a vid
 
 
 
-![vid](https://github.com/Stylos21/Smyror/assets/33937944/6d1bb6ce-0b33-40fd-a267-b61dec4f182c)
+![vid](https://youtube.com/shorts/eam76JzjhzI?feature=share)
+
+(video uploaded to youtube in order to properly format on this README file.)
 
